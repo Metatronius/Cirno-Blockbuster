@@ -2,7 +2,7 @@ using System;
 
 namespace Nine.Core
 {
-	public enum BlockType
+	public enum BlockType //garbage must be last to continue working as intended
 	{
 		Green,
 		Blue,
@@ -31,7 +31,7 @@ namespace Nine.Core
         
         public Block(int x, int y)
         {
-            this.Type = (BlockType)rand.Next(Enum.GetNames(typeof(BlockType)).Length);
+            this.Type = (BlockType)rand.Next(Enum.GetNames(typeof(BlockType)).Length - 1); //remember to add colors before garbage in the enum
             this.Position = (x, y);
         }
         
