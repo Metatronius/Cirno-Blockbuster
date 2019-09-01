@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3000641450867548848}
   - component: {fileID: 5284120940240423400}
+  - component: {fileID: 141477964020403849}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -80,3 +81,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &141477964020403849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5498762083383611032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2f5515d34a38f4ca3bcb3f0b78b14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIndex: 0

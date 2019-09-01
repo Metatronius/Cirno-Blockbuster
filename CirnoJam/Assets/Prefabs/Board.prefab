@@ -93,5 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98eb69fb889186849b3a6f25a07e8624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGameOver: 0
   ViewBlockFactory: {fileID: 7714072587359233663, guid: 572eaad945b577949a302e02419d7daa,
     type: 3}
+  ScrollTime: 0
+  PlayerIndex: 0
+  Cursor: {fileID: 141477964020403849, guid: 58f94432d1449c34e9ec02b03e30b07b, type: 3}

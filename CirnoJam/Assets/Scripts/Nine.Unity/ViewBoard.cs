@@ -13,6 +13,7 @@ public class ViewBoard : MonoBehaviour
     public ViewBlockFactory ViewBlockFactory;
     public float ScrollTime;
     public int PlayerIndex;
+    public Cursor Cursor;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,6 @@ public class ViewBoard : MonoBehaviour
         position = this.GetComponent<Transform>();
         gameBoard = new Nine.Core.Board(ScrollTime);
         blocks = new List<ViewBlock>();
-
         for (int x = 0; x < Nine.Core.Board.ROW_WIDTH; x++)
         {
             for (int y = 0; y < Nine.Core.Board.COLUMN_HEIGHT; y++)
@@ -35,8 +35,29 @@ public class ViewBoard : MonoBehaviour
                 }
             }
         }
+        Cursor = GameObject.Instantiate(Cursor);
     }
 
+    private void updateCursor()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Cursor.Move(-1, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Cursor.Move(1, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Cursor.Move(0, -1);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Cursor.Move(0, 1);
+        }
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -44,6 +65,7 @@ public class ViewBoard : MonoBehaviour
         {
             return;
         }
+        updateCursor();
 
         gameBoard.Update(Time.deltaTime);
 
@@ -57,12 +79,14 @@ public class ViewBoard : MonoBehaviour
                     ViewBlockFactory.CreateBlock(gameBoard.Blocks[0][x], this.transform.position + new Vector3(x + 1, 1, 1), this.transform.rotation)
                 );
             }
+            Cursor.Move(0, 1);
         }
 
         foreach (var block in blocks)
         {
             block.transform.position = this.transform.position + new Vector3(block.Block.Position.X + 1, block.Block.Position.Y + 1 + (gameBoard.ScrollProgress % gameBoard.ScrollTime) / gameBoard.ScrollTime, 1);
         }
+        Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 1, Cursor.GridPosition.Y + 1 + (gameBoard.ScrollProgress % gameBoard.ScrollTime) / gameBoard.ScrollTime, 1);
 
         IsGameOver = gameBoard.GameOver;
     }
