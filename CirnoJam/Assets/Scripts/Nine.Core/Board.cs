@@ -87,8 +87,16 @@ namespace Nine.Core
 			var blockA = Blocks[pointA.Y][pointA.X];
 			var blockB = Blocks[pointB.Y][pointB.X];
 
-			// TODO: account for animation/state transition time
-			// maybe tell the blocks that they are in the swapping state, and where to?
+            // TODO: account for animation/state transition time
+            // maybe tell the blocks that they are in the swapping state, and where to?
+            if (blockA != null)
+            {
+                blockA.Position = pointB;
+            }
+            if (blockB != null)
+            {
+                blockB.Position = pointA;
+            }
 
 			Blocks[pointA.Y][pointA.X] = blockB;
 			Blocks[pointB.Y][pointB.X] = blockA;

@@ -56,8 +56,13 @@ public class ViewBoard : MonoBehaviour
         {
             Cursor.Move(0, 1);
         }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            gameBoard.Swap(Cursor.GridPosition, (Cursor.GridPosition.X+1, Cursor.GridPosition.Y) );
+        }
 
     }
+
     // Update is called once per frame
     void Update()
     {
