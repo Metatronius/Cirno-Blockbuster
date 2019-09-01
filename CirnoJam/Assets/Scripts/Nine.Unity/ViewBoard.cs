@@ -40,19 +40,19 @@ public class ViewBoard : MonoBehaviour
 
     private void updateCursor()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && Cursor.GridPosition.X > 0)
         {
             Cursor.Move(-1, 0);
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && Cursor.GridPosition.X < Nine.Core.Board.ROW_WIDTH - 2)
         {
             Cursor.Move(1, 0);
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) && Cursor.GridPosition.Y > 1)
         {
             Cursor.Move(0, -1);
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && Cursor.GridPosition.Y < gameBoard.StackHeight)
         {
             Cursor.Move(0, 1);
         }
@@ -85,6 +85,7 @@ public class ViewBoard : MonoBehaviour
                 );
             }
             Cursor.Move(0, 1);
+            
         }
 
         foreach (var block in blocks)

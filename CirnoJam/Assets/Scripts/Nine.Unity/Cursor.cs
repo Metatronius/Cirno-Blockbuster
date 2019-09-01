@@ -10,7 +10,7 @@ public class Cursor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GridPosition = (0, 0);
+        GridPosition = (2, 3);
         var boards = FindObjectsOfType<ViewBoard>();
     }
 

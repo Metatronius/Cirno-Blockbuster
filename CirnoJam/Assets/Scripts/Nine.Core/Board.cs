@@ -6,7 +6,7 @@ namespace Nine.Core
     public class Board : IUpdatable
     {
         public const int ROW_WIDTH = 6;
-        public const int COLUMN_HEIGHT = 12;
+        public const int COLUMN_HEIGHT = 13;
         public readonly float ScrollTime;
         public float ScrollProgress;
 
@@ -20,6 +20,21 @@ namespace Nine.Core
 				return Blocks[COLUMN_HEIGHT - 1].Any(block => block != null);
 			}
 		}
+
+        public int StackHeight
+        {
+            get
+            {
+                for(int y = COLUMN_HEIGHT - 1; y < COLUMN_HEIGHT; y--)
+                {
+                    if (Blocks[y].Any((block) => block != null))
+                    {
+                        return y;
+                    }
+                }
+                return 0;
+            }
+        }
 
         public Board(float scrollTime)
         {
