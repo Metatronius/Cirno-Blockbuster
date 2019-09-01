@@ -7,6 +7,9 @@ namespace Nine.Core
     {
         public const int ROW_WIDTH = 6;
         public const int COLUMN_HEIGHT = 12;
+        public readonly float ScrollTime;
+        public float ScrollProgress;
+
 
         // Blocks are accessed by Blocks[y][x]
 		public Block[][] Blocks { get; set; }
@@ -18,8 +21,9 @@ namespace Nine.Core
 			}
 		}
 
-        public Board()
+        public Board(float scrollTime)
         {
+            this.ScrollTime = scrollTime;
             this.Initialize();
         }
 
@@ -31,7 +35,7 @@ namespace Nine.Core
             {
                 if (row < Blocks.Length / 2)
                 {
-                    Blocks[row] = GetNewRow();
+                    Blocks[row] = GetNewRow(row);
                 }
                 else
                 {
@@ -42,28 +46,37 @@ namespace Nine.Core
 
 		public void ShiftBlocksUp()
 		{
+            ScrollProgress -= ScrollTime;
+
 			// shift UP
-			for (int row = 0; row < Blocks.Length; row++)
+			for (int row = Blocks.Length - 1; row >= 0; row--)
 			{
 				// replace bottom row with some fresh blocks
 				if(row == 0)
 				{
-					Blocks[row] = GetNewRow();
+					Blocks[row] = GetNewRow(0);
 				}
 				else
 				{
 					Blocks[row] = Blocks[row - 1]; // TODO: ShiftRowUp(row) ?
+                    for (int x = 0; x < ROW_WIDTH; x++)
+                    {
+                        if (Blocks[row][x] != null)
+                        {
+                            Blocks[row][x].Position = (Blocks[row][x].Position.X, row);
+                        }
+                    }
 				}
 			}
 		}
 
-		public Block[] GetNewRow()
+		public Block[] GetNewRow(int y)
 		{
 			var row = new Block[ROW_WIDTH];
 
 			for (int i = 0; i < row.Length; i++)
 			{
-				row[i] = new Block();
+				row[i] = new Block(i, y);
 			}
 
 			return row;
@@ -83,7 +96,7 @@ namespace Nine.Core
 
 		public void Update(float deltaTime)
 		{
-			
+            ScrollProgress += deltaTime;
 		}
 	}
 }

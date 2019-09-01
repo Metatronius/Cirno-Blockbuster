@@ -32,23 +32,12 @@ public class ViewBlockFactory : MonoBehaviour
 		}
 	}
 
-	public ViewBlock CreateBlock(Vector3 position, Quaternion rotation)
+	public ViewBlock CreateBlock(Nine.Core.Block block, Vector3 boardPosition, Quaternion rotation)
 	{
-		Nine.Core.Block block = new Nine.Core.Block();
 		var blockSprite = GetBlockSprite(block.Type);
-		ViewBlock viewBlock = MonoBehaviour.Instantiate<ViewBlock>(BaseBlock, position, rotation);
+		ViewBlock viewBlock = MonoBehaviour.Instantiate<ViewBlock>(BaseBlock, boardPosition, rotation);
 
 		viewBlock.Block = block;
-
-		viewBlock.gameObject.GetComponent<SpriteRenderer>().sprite = blockSprite;
-
-		return viewBlock;
-	}
-
-	public ViewBlock CreateBlock(Nine.Core.BlockType blockType, Vector3 position, Quaternion rotation)
-	{
-		var blockSprite = GetBlockSprite(blockType);
-		ViewBlock viewBlock = MonoBehaviour.Instantiate<ViewBlock>(BaseBlock, position, rotation);
 
 		viewBlock.gameObject.GetComponent<SpriteRenderer>().sprite = blockSprite;
 

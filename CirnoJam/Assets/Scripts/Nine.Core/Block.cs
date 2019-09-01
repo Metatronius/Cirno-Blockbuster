@@ -12,6 +12,7 @@ namespace Nine.Core
 		Garbage,
 	}
 
+
     //public struct Neighbors
     //{
     //    Block left;
@@ -25,18 +26,15 @@ namespace Nine.Core
         private static readonly Random rand = new Random();
 
         public BlockType Type { get; }
+        public (int X, int Y) Position { get; set; }
         //public Neighbors Neighbors { get; set; }
-
-        public Block()
+        
+        public Block(int x, int y)
         {
             this.Type = (BlockType)rand.Next(Enum.GetNames(typeof(BlockType)).Length);
+            this.Position = (x, y);
         }
-
-        public Block(BlockType blockType)
-		{
-			this.Type = blockType;
-		}
-
+        
         // public Block(BlockType blockType, Block left, Block right, Block up, Block down)
         // {
         //     this.Type = blockType;
