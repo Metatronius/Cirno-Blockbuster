@@ -12,6 +12,7 @@ public class ViewBoard : MonoBehaviour
     public bool IsGameOver = false;
     public ViewBlockFactory ViewBlockFactory;
     public float ScrollTime;
+    public int PlayerIndex;
 
     // Start is called before the first frame update
     void Start()
