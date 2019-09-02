@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551979638386422225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.19, y: 11.29, z: -8.338383}
+  m_LocalPosition: {x: -21, y: 10, z: -8.338383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,6 +96,6 @@ MonoBehaviour:
   IsGameOver: 0
   ViewBlockFactory: {fileID: 7714072587359233663, guid: 572eaad945b577949a302e02419d7daa,
     type: 3}
-  ScrollTime: 0
-  PlayerIndex: 0
+  ScrollTime: 5
+  PlayerIndex: 1
   Cursor: {fileID: 141477964020403849, guid: 58f94432d1449c34e9ec02b03e30b07b, type: 3}

@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseBlock: {fileID: -7098323336632752977, guid: d87e10c96c07b1e4e8ecc283c7df5716,
     type: 3}
-  PinkBlockSprite: {fileID: 21300000, guid: adc145f5c153d9748b7c4841cc9bbe06, type: 3}
+  PinkBlockSprite: {fileID: 21300000, guid: 99ab3dbc5f1862d4fbe1ce1ffd949b1d, type: 3}
   GreenBlockSprite: {fileID: 21300000, guid: 72f9973663691d34c824648323316dd0, type: 3}
   BlueBlockSprite: {fileID: 21300000, guid: 2ce6f296ca270744b878c217e0390cfa, type: 3}
   BlackBlockSprite: {fileID: 21300000, guid: c3196979100c70b4d8f7fe72f326db31, type: 3}

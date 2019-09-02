@@ -15,6 +15,8 @@ public class ViewBoard : MonoBehaviour
     public int PlayerIndex;
     public Cursor Cursor;
 
+    public int StackHeight => gameBoard.StackHeight;
+
     // Start is called before the first frame update
     void Start()
     {
