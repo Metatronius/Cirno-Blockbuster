@@ -96,6 +96,6 @@ MonoBehaviour:
   IsGameOver: 0
   ViewBlockFactory: {fileID: 7714072587359233663, guid: 572eaad945b577949a302e02419d7daa,
     type: 3}
-  ScrollTime: 5
+  ScrollSpeed: 0.2
   PlayerIndex: 1
   Cursor: {fileID: 141477964020403849, guid: 58f94432d1449c34e9ec02b03e30b07b, type: 3}
