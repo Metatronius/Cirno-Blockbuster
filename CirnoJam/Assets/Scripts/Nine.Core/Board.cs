@@ -61,6 +61,14 @@ namespace Nine.Core
 				{
 					Blocks[row] = new Block[ROW_WIDTH];
 				}
+
+				foreach(var block in Blocks[row])
+				{
+					if (block != null)
+					{
+						block.SetSwappable(block.Position.Y > 0);
+					}
+				}
 			}
 
 			processMatches();
@@ -88,6 +96,11 @@ namespace Nine.Core
 						if (Blocks[row][x] != null)
 						{
 							Blocks[row][x].Position = (Blocks[row][x].Position.X, row);
+
+							if(row == 1)
+							{
+								Blocks[row][x].SetSwappable(true);
+							}
 						}
 					}
 				}

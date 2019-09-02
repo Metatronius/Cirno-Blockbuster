@@ -16,12 +16,20 @@ namespace Nine.Core
 	{
 		public BlockType Type { get; }
 		public (int X, int Y) Position { get; set; }
-		//public Neighbors Neighbors { get; set; }
+		public bool CanSwap { get; private set; }
+		public bool IsClearing { get; private set; }
 
 		public Block(int x, int y, BlockType type)
 		{
 			this.Type = type;
 			this.Position = (x, y);
+			this.CanSwap = false;
+			this.IsClearing = false;
+		}
+
+		public void SetSwappable(bool canSwap)
+		{
+			this.CanSwap = canSwap;
 		}
 	}
 }

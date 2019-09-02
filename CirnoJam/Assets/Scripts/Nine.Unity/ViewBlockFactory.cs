@@ -10,31 +10,37 @@ public class ViewBlockFactory : MonoBehaviour
 	public Sprite BlackBlockSprite;
 	public Sprite WhiteBlockSprite;
 	public Sprite GarbageBlockSprite;
+	public Sprite InactivePinkBlockSprite;
+	public Sprite InactiveGreenBlockSprite;
+	public Sprite InactiveBlueBlockSprite;
+	public Sprite InactiveBlackBlockSprite;
+	public Sprite InactiveWhiteBlockSprite;
+	public Sprite InactiveGarbageBlockSprite;
 
-	private Sprite GetBlockSprite(Nine.Core.BlockType blockType)
+	private Sprite GetBlockSprite(Nine.Core.Block block)
 	{
-		switch(blockType)
+		switch(block.Type)
 		{
 			case Nine.Core.BlockType.Pink:
-				return PinkBlockSprite;
+				return block.CanSwap ? PinkBlockSprite : InactivePinkBlockSprite;
 			case Nine.Core.BlockType.Green:
-				return GreenBlockSprite;
+				return block.CanSwap ? GreenBlockSprite : InactiveGreenBlockSprite;
 			case Nine.Core.BlockType.Blue:
-				return BlueBlockSprite;
+				return block.CanSwap ? BlueBlockSprite : InactiveBlueBlockSprite;
 			case Nine.Core.BlockType.Black:
-				return BlackBlockSprite;
+				return block.CanSwap ? BlackBlockSprite : InactiveBlackBlockSprite;
 			case Nine.Core.BlockType.White:
-				return WhiteBlockSprite;
+				return block.CanSwap ? WhiteBlockSprite : InactiveWhiteBlockSprite;
 			case Nine.Core.BlockType.Garbage:
 				return GarbageBlockSprite;
 			default:
-				throw new Exception($"no sprite hooked up for specified block type: {blockType.ToString()}");
+				throw new Exception($"no sprite hooked up for specified block type: {block.Type.ToString()}");
 		}
 	}
 
 	public ViewBlock CreateBlock(Nine.Core.Block block)
 	{
-		var blockSprite = GetBlockSprite(block.Type);
+		var blockSprite = GetBlockSprite(block);
 
 		ViewBlock viewBlock = MonoBehaviour.Instantiate<ViewBlock>(BaseBlock);
 
