@@ -62,6 +62,10 @@ namespace Nine.Core
 					Blocks[row] = new Block[ROW_WIDTH];
 				}
 			}
+
+			processMatches();
+			Score = 0;
+			BlocksCleared = 0;
 		}
 
 		public void ShiftBlocksUp()

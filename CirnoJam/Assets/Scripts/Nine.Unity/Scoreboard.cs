@@ -11,7 +11,7 @@ public class Scoreboard : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		ScoreboardText = Instantiate(ScoreboardText, new Vector3(850, 500, -50), this.transform.rotation);
+		ScoreboardText = Instantiate(ScoreboardText, new Vector3(1400, 800, -50), this.transform.rotation);
 		ScoreboardText.transform.SetParent(this.transform, true);
 	}
 
@@ -19,7 +19,6 @@ public class Scoreboard : MonoBehaviour
     void Update()
     {
 		ViewBoard = FindObjectOfType<ViewBoard>();
-		ScoreboardText.text = $"Score: { ViewBoard.Score }\nBlocks Destroyed: { ViewBoard.BlocksCleared }";
-
+		ScoreboardText.text = $"Score: { ViewBoard.Score }\nBlocks Cleared: { ViewBoard.BlocksCleared }";
 	}
 }
