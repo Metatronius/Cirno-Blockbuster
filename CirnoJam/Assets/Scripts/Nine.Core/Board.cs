@@ -8,15 +8,16 @@ namespace Nine.Core
 	{
 		public const int ROW_WIDTH = 6;
 		public const int COLUMN_HEIGHT = 13;
-		public float ScrollSpeed { get; private set; }
-		public float ScrollProgress;
-		public uint Score { get; private set; } = 0;
-		public int BlocksCleared { get; private set; } = 0;
 
 		private readonly Random rand = new Random();
-		
-		// Blocks are accessed by Blocks[y][x]
-		public Block[][] Blocks { get; set; }
+
+		public float ScrollProgress { get; set; }
+		public float ScrollSpeed { get; private set; }
+		public uint Score { get; private set; } = 0;
+		public int BlocksCleared { get; private set; } = 0;
+		public Block[][] Blocks { get; set; } // Blocks are accessed by Blocks[y][x]
+		public List<Nine.Core.MatchedSet> MatchedSets { get; set; }
+
 		public bool GameOver
 		{
 			get
@@ -36,15 +37,52 @@ namespace Nine.Core
 						return y;
 					}
 				}
+
 				return 0;
+			}
+		}
+
+		public IEnumerable<Block> AllBlocks
+		{
+			get
+			{
+				List<Block> allBlocks = new List<Block>();
+
+				for (int y = 0; y < COLUMN_HEIGHT; y++)
+				{
+					for (int x = 0; x < ROW_WIDTH; x++)
+					{
+						if(Blocks[y][x] != null)
+						{
+							allBlocks.Add(Blocks[y][x]);
+						}
+					}
+				}
+
+				return allBlocks;
+			}
+		}
+
+		public bool IsFrozen
+		{
+			get
+			{
+				return  AllBlocks.Any
+				(
+					(block) => 
+					{
+						return new Nine.Core.BlockStatus[] { Nine.Core.BlockStatus.Clearing }
+							.Contains(block.Status);
+					}
+				);
 			}
 		}
 
 		public Board(float scrollSpeed) //Constructor
 		{
+			this.MatchedSets = new List<MatchedSet>();
 			this.ScrollSpeed = scrollSpeed;
 			this.Initialize();
-			processMatches();
 		}
 
 		public void Initialize()
@@ -66,12 +104,19 @@ namespace Nine.Core
 				{
 					if (block != null)
 					{
-						block.SetSwappable(block.Position.Y > 0);
+						if(block.Position.Y > 0)
+						{
+							block.Status = Nine.Core.BlockStatus.Active;
+						}
+						else
+						{
+							block.Status = Nine.Core.BlockStatus.Inactive;
+						}
 					}
 				}
 			}
 
-			processMatches();
+			ProcessMatches();
 			Score = 0;
 			BlocksCleared = 0;
 		}
@@ -99,14 +144,14 @@ namespace Nine.Core
 
 							if(row == 1)
 							{
-								Blocks[row][x].SetSwappable(true);
+								Blocks[row][x].Status = Nine.Core.BlockStatus.Active;
 							}
 						}
 					}
 				}
 			}
 
-			processMatches();
+			ProcessMatches();
 		}
 
 		public Block[] GetNewRow(int y)
@@ -127,13 +172,13 @@ namespace Nine.Core
 				lastLastType = lastType;
 				lastType = thisType;
 
-				row[i] = new Block(i, y, thisType.Value);
+				row[i] = new Block(i, y, thisType.Value, this);
 			}
 
 			return row;
 		}
 
-		private void swapBlocks((int X, int Y) pointA, (int X, int Y) pointB)
+		private void SwapBlocks((int X, int Y) pointA, (int X, int Y) pointB)
 		{
 			var blockA = Blocks[pointA.Y][pointA.X];
 			var blockB = Blocks[pointB.Y][pointB.X];
@@ -155,14 +200,29 @@ namespace Nine.Core
 
 		public void Swap((int X, int Y) pointA, (int X, int Y) pointB)
 		{
-			swapBlocks(pointA, pointB);
-			processMatches();
-			fillGaps();
+			if((GetBlock(pointA) == null || GetBlock(pointA).CanSwap) && (GetBlock(pointB) == null || GetBlock(pointB).CanSwap))
+			{
+				SwapBlocks(pointA, pointB);
+				//ProcessMatches();
+				FillGaps();
+			}
 		}
 
 		public void Update(float deltaTime)
 		{
-			ScrollProgress += deltaTime * ScrollSpeed;
+			foreach (var set in MatchedSets)
+			{
+				set.Update(deltaTime);
+			}
+
+			FillGaps();
+
+			MatchedSets.RemoveAll(set => set.IsCleared);
+
+			if (!IsFrozen)
+			{
+				ScrollProgress += deltaTime * ScrollSpeed;
+			}
 		}
 
 		public Block GetBlock((int X, int Y) position)
@@ -172,7 +232,7 @@ namespace Nine.Core
 
 		Block GetBlock(int x, int y)
 		{
-			if(isInPlayableBoard(x, y))
+			if(IsInPlayableBoard(x, y))
 			{
 				return Blocks[y][x];
 			}
@@ -180,17 +240,17 @@ namespace Nine.Core
 			return null;
 		}
 
-		private bool isInPlayableBoard(int x, int y)
+		private bool IsInPlayableBoard(int x, int y)
 		{
 			return (x >= 0 && y >= 1 && x < ROW_WIDTH && y < COLUMN_HEIGHT);
 		}
 
-		private void fillGap(int x, int y)
+		private void FillGap(int x, int y)
 		{
-			swapBlocks((x, y), (x, y + 1));
+			SwapBlocks((x, y), (x, y + 1));
 		}
 
-		private void fillGaps()
+		public void FillGaps()
 		{
 			bool isBlockThatCanFall = true;
 
@@ -204,29 +264,29 @@ namespace Nine.Core
 					{
 						if (Blocks[y][x] == null)
 						{
-							fillGap(x, y);
+							FillGap(x, y);
 						}
 
-						if (Blocks[y][x] != null && isInPlayableBoard(x, y - 1) && Blocks[y - 1][x] == null)
+						if (Blocks[y][x] != null && IsInPlayableBoard(x, y - 1) && Blocks[y - 1][x] == null)
 						{
 							isBlockThatCanFall = true;
 						}
 					}
 				}
 			}
-			processMatches();
+
+			ProcessMatches();
 		}
 
-		private void removeBlock(Block block)
+		public void ClearBlock(Block block)
 		{
 			Blocks[block.Position.Y][block.Position.X] = null;
-			fillGaps();
 			BlocksCleared++;
 
-			adjustScrollSpeed();
+			AdjustScrollSpeed();
 		}
 
-		private void adjustScrollSpeed()
+		private void AdjustScrollSpeed()
 		{
 			ScrollSpeed = 1/5f;
 
@@ -252,7 +312,7 @@ namespace Nine.Core
 			}
 		}
 
-		private void processMatches()
+		private void ProcessMatches()
 		{
 			// do whatever we want to do with matches -- delete blocks for now
 			var matchBlocks = GetMatchBlocks();
@@ -263,11 +323,8 @@ namespace Nine.Core
 				uint blockScore = (uint)(blocksToClear - 2);
 
 				Score += (blockScore * blockScore) * 100U;
-			}
 
-			foreach(var block in matchBlocks)
-			{
-				removeBlock(block);
+				MatchedSets.Add(new MatchedSet(matchBlocks, 1, this));
 			}
 		}
 
@@ -291,7 +348,16 @@ namespace Nine.Core
 					var aboveBlock = GetBlock(x, y + 1);
 					var belowBlock = GetBlock(x, y - 1);
 
-					if (leftBlock != null && rightBlock != null && thisBlock.Type == leftBlock.Type && thisBlock.Type == rightBlock.Type)
+					if
+					(
+						leftBlock != null 
+						&& rightBlock != null 
+						&& thisBlock.Type == leftBlock.Type 
+						&& thisBlock.Type == rightBlock.Type
+						&& thisBlock.Status == Nine.Core.BlockStatus.Active
+						&& rightBlock.Status == Nine.Core.BlockStatus.Active
+						&& leftBlock.Status == Nine.Core.BlockStatus.Active
+					)
 					{
 						// horizontal match
 						// TODO: flag blocks as inactive/able to be deleted by typing
@@ -302,7 +368,16 @@ namespace Nine.Core
 						matchBlocks.Add(rightBlock);
 					}
 
-					if (aboveBlock != null && belowBlock != null && thisBlock.Type == aboveBlock.Type && thisBlock.Type == belowBlock.Type)
+					if
+					(
+						aboveBlock != null
+						&& belowBlock != null
+						&& thisBlock.Type == aboveBlock.Type
+						&& thisBlock.Type == belowBlock.Type
+						&& thisBlock.Status == Nine.Core.BlockStatus.Active
+						&& aboveBlock.Status == Nine.Core.BlockStatus.Active
+						&& belowBlock.Status == Nine.Core.BlockStatus.Active
+					)
 					{
 						// vertical match
 						// TODO: flag blocks as inactive/able to be deleted by typing

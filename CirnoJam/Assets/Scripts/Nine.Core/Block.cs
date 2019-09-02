@@ -12,24 +12,30 @@ namespace Nine.Core
 		Garbage,
 	}
 
+	public enum BlockStatus
+	{
+		Active,
+		Swapping,
+		Inactive,
+		Clearing,
+	}
+
 	public class Block
 	{
+		private float timeToClear = 0f;
+		private readonly Board board;
+
 		public BlockType Type { get; }
 		public (int X, int Y) Position { get; set; }
-		public bool CanSwap { get; private set; }
-		public bool IsClearing { get; private set; }
+		public BlockStatus Status { get; set; }
+		public bool CanSwap => this.Status == BlockStatus.Active;
 
-		public Block(int x, int y, BlockType type)
+		public Block(int x, int y, BlockType type, Board board)
 		{
 			this.Type = type;
 			this.Position = (x, y);
-			this.CanSwap = false;
-			this.IsClearing = false;
-		}
-
-		public void SetSwappable(bool canSwap)
-		{
-			this.CanSwap = canSwap;
+			this.Status = BlockStatus.Inactive;
+			this.board = board;
 		}
 	}
 }
