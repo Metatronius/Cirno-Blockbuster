@@ -47,3 +47,6 @@ MonoBehaviour:
     type: 3}
   ViewBoard: {fileID: 8776172976933189513, guid: 48934b734157478459839a4603ef6265,
     type: 3}
+  Canvas: {fileID: 7947051266604031841, guid: b04bb7a0f0f9b76499e6e81c361e4340, type: 3}
+  ScoreboardText: {fileID: 8119871366499461548, guid: bca95d0ff6412e9409f086840f5efa19,
+    type: 3}

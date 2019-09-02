@@ -16,6 +16,8 @@ public class ViewBoard : MonoBehaviour
 	public Cursor Cursor;
 
 	public int StackHeight => gameBoard.StackHeight;
+	public uint Score => gameBoard.Score;
+	public int BlocksCleared => gameBoard.BlocksCleared;
 
 	// Start is called before the first frame update
 	public void Start()

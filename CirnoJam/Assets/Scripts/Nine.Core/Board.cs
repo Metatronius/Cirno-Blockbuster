@@ -10,9 +10,10 @@ namespace Nine.Core
 		public const int COLUMN_HEIGHT = 13;
 		public float ScrollSpeed { get; private set; }
 		public float ScrollProgress;
+		public uint Score { get; private set; } = 0;
+		public int BlocksCleared { get; private set; } = 0;
 
 		private readonly Random rand = new Random();
-		private int blocksDestroyed = 0;
 		
 		// Blocks are accessed by Blocks[y][x]
 		public Block[][] Blocks { get; set; }
@@ -203,7 +204,7 @@ namespace Nine.Core
 		{
 			Blocks[block.Position.Y][block.Position.X] = null;
 			fillGaps();
-			blocksDestroyed++;
+			BlocksCleared++;
 
 			adjustScrollSpeed();
 		}
@@ -212,23 +213,23 @@ namespace Nine.Core
 		{
 			ScrollSpeed = 1/5f;
 
-			if (blocksDestroyed > 10)
+			if (BlocksCleared > 10)
 			{
 				ScrollSpeed = 2/9f;
 			}
-			if (blocksDestroyed > 30)
+			if (BlocksCleared > 30)
 			{
 				ScrollSpeed = 1/4f;
 			}
-			if (blocksDestroyed > 60)
+			if (BlocksCleared > 60)
 			{
 				ScrollSpeed = 2/7f;
 			}
-			if (blocksDestroyed > 120)
+			if (BlocksCleared > 120)
 			{
 				ScrollSpeed = 1/3f;
 			}
-			if (blocksDestroyed > 240)
+			if (BlocksCleared > 240)
 			{
 				ScrollSpeed = 2/5f;
 			}
@@ -238,6 +239,14 @@ namespace Nine.Core
 		{
 			// do whatever we want to do with matches -- delete blocks for now
 			var matchBlocks = GetMatchBlocks();
+			var blocksToClear = matchBlocks.Count();
+
+			if (blocksToClear > 0)
+			{
+				uint blockScore = (uint)(blocksToClear - 2);
+
+				Score += (blockScore * blockScore) * 100U;
+			}
 
 			foreach(var block in matchBlocks)
 			{
