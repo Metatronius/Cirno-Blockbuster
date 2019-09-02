@@ -40,6 +40,7 @@ namespace Nine.Core
         {
             this.ScrollTime = scrollTime;
             this.Initialize();
+            processMatches();
         }
 
         public void Initialize()
@@ -83,7 +84,9 @@ namespace Nine.Core
                     }
 				}
 			}
-		}
+
+            processMatches();
+        }
 
 		public Block[] GetNewRow(int y)
 		{
@@ -97,10 +100,10 @@ namespace Nine.Core
 			return row;
 		}
 
-		public void Swap((int X, int Y) pointA, (int X, int Y) pointB)
-		{
-			var blockA = Blocks[pointA.Y][pointA.X];
-			var blockB = Blocks[pointB.Y][pointB.X];
+        private void swapBlocks((int X, int Y) pointA, (int X, int Y) pointB)
+        {
+            var blockA = Blocks[pointA.Y][pointA.X];
+            var blockB = Blocks[pointB.Y][pointB.X];
 
             // TODO: account for animation/state transition time
             // maybe tell the blocks that they are in the swapping state, and where to?
@@ -113,16 +116,20 @@ namespace Nine.Core
                 blockB.Position = pointA;
             }
 
-			Blocks[pointA.Y][pointA.X] = blockB;
-			Blocks[pointB.Y][pointB.X] = blockA;
+            Blocks[pointA.Y][pointA.X] = blockB;
+            Blocks[pointB.Y][pointB.X] = blockA;
+        }
 
+        public void Swap((int X, int Y) pointA, (int X, int Y) pointB)
+		{
+            swapBlocks(pointA, pointB);
             processMatches();
+            fillGaps();
 		}
 
 		public void Update(float deltaTime)
 		{
             ScrollProgress += deltaTime;
-            fillGaps();
         }
 
         public Block GetBlock((int X, int Y) position)
@@ -132,7 +139,7 @@ namespace Nine.Core
 
         Block GetBlock(int x, int y)
         {
-            if(x >= 0 && y >= 1 && x < ROW_WIDTH && y < COLUMN_HEIGHT)
+            if(isInPlayableBoard(x, y))
             {
                 return Blocks[y][x];
             }
@@ -140,28 +147,48 @@ namespace Nine.Core
             return null;
         }
 
+        private bool isInPlayableBoard(int x, int y)
+        {
+            return (x >= 0 && y >= 1 && x < ROW_WIDTH && y < COLUMN_HEIGHT);
+        }
+
         private void fillGap(int x, int y)
         {
-            Swap((x, y), (x, y + 1));
+            swapBlocks((x, y), (x, y + 1));
         }
 
         private void fillGaps()
         {
-            for (int y = 0; y < COLUMN_HEIGHT - 1; y++)
+            bool isBlockThatCanFall = true;
+
+            while (isBlockThatCanFall)
             {
-                for (int x = 0; x < ROW_WIDTH; x++)
+                isBlockThatCanFall = false;
+
+                for (int y = 0; y < COLUMN_HEIGHT - 1; y++)
                 {
-                    if (Blocks[y][x] == null)
+                    for (int x = 0; x < ROW_WIDTH; x++)
                     {
-                        fillGap(x, y);
+                        if (Blocks[y][x] == null)
+                        {
+                            fillGap(x, y);
+                        }
+
+                        if (Blocks[y][x] != null && isInPlayableBoard(x, y - 1) && Blocks[y - 1][x] == null)
+                        {
+                            isBlockThatCanFall = true;
+                        }
                     }
                 }
             }
+            processMatches();
         }
 
         private void removeBlock(Block block)
         {
-            Blocks[block.Position.Y][block.Position.X] = null;            
+            Blocks[block.Position.Y][block.Position.X] = null;
+            fillGaps();
+
         }
 
         private void processMatches()
