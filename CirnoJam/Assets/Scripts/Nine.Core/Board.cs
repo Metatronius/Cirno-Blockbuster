@@ -8,8 +8,10 @@ namespace Nine.Core
     {
         public const int ROW_WIDTH = 6;
         public const int COLUMN_HEIGHT = 13;
-        public readonly float ScrollTime;
+        public float ScrollTime { get; private set; }
         public float ScrollProgress;
+
+        private int blocksDestroyed = 0;
         
         // Blocks are accessed by Blocks[y][x]
 		public Block[][] Blocks { get; set; }
@@ -188,6 +190,35 @@ namespace Nine.Core
         {
             Blocks[block.Position.Y][block.Position.X] = null;
             fillGaps();
+            blocksDestroyed++;
+            adjustScrollSpeed();
+        }
+
+        private void adjustScrollSpeed()
+        {
+            ScrollTime = 5.0f;
+
+            if (blocksDestroyed > 10)
+            {
+                ScrollTime = 4.5f; 
+            }
+            if (blocksDestroyed > 20)
+            {
+                ScrollTime = 4f;
+            }
+            if (blocksDestroyed > 30)
+            {
+                ScrollTime = 3.5f;
+            }
+            if (blocksDestroyed > 40)
+            {
+                ScrollTime = 3.0f;
+            }
+            if (blocksDestroyed > 50)
+            {
+                ScrollTime = Math.Max(2, 3 - (blocksDestroyed - 50) / 100);
+            }
+            Console.WriteLine(ScrollTime);
 
         }
 
