@@ -99,3 +99,9 @@ MonoBehaviour:
   ScrollSpeed: 0.2
   PlayerIndex: 1
   Cursor: {fileID: 141477964020403849, guid: 58f94432d1449c34e9ec02b03e30b07b, type: 3}
+  SoundPlayer: {fileID: -4597005968553616822, guid: 2d75bb6dd72ad654ca9a5ebd065d8053,
+    type: 3}
+  SwapSound: {fileID: 8300000, guid: 488fee2d42a2e4c4599d7d2cdd860f48, type: 3}
+  SwapErrorSound: {fileID: 8300000, guid: d1deab730e80dbf4cb46bb95619f46a7, type: 3}
+  MatchMadeSound: {fileID: 8300000, guid: 8c89ddd5d160e2546853f77e082f956f, type: 3}
+  MatchClearSound: {fileID: 0}

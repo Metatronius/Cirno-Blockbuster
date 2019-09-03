@@ -43,8 +43,8 @@ public class MusicManager : MonoBehaviour
         loopSource.clip = loop;
 
         var introDuration = (double)intro.samples / intro.frequency;
-        introSource.enabled = true;
-        loopSource.enabled = true;
+        introSource.volume = .5f;
+        loopSource.volume = .5f;
         introSource.Play();
         loopSource.PlayScheduled(AudioSettings.dspTime + introDuration);
     }

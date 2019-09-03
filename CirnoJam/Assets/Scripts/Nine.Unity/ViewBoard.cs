@@ -15,6 +15,12 @@ public class ViewBoard : MonoBehaviour
 	public int PlayerIndex;
 	public Cursor Cursor;
 
+	public SFXPlayer SoundPlayer;
+	public AudioClip SwapSound;
+	public AudioClip SwapErrorSound;
+	public AudioClip MatchMadeSound;
+	public AudioClip MatchClearSound;
+
 	public int StackHeight => gameBoard.StackHeight;
 	public uint Score => gameBoard.Score;
 	public int BlocksCleared => gameBoard.BlocksCleared;
@@ -42,6 +48,7 @@ public class ViewBoard : MonoBehaviour
 		}
 
 		Cursor = GameObject.Instantiate(Cursor);
+		SoundPlayer = GameObject.Instantiate(SoundPlayer);
 	}
 
 	// Update is called once per frame
@@ -74,6 +81,19 @@ public class ViewBoard : MonoBehaviour
 		IsGameOver = gameBoard.GameOver;
 	}
 
+	private void Swap((int X, int Y) pointA, (int X, int Y) pointB)
+	{
+		if((gameBoard.GetBlock(pointA) == null || gameBoard.GetBlock(pointA).CanSwap) && (gameBoard.GetBlock(pointB) == null || gameBoard.GetBlock(pointB).CanSwap))
+		{
+			gameBoard.Swap(pointA, pointB);
+			SoundPlayer.PlayTrack(SwapSound);
+		}
+		else
+		{
+			SoundPlayer.PlayTrack(SwapErrorSound);
+		}
+	}
+
 	private void updateCursor()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftArrow) && Cursor.GridPosition.X > 0)
@@ -94,7 +114,7 @@ public class ViewBoard : MonoBehaviour
 		}
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			gameBoard.Swap(Cursor.GridPosition, (Cursor.GridPosition.X+1, Cursor.GridPosition.Y) );
+			this.Swap(Cursor.GridPosition, (Cursor.GridPosition.X+1, Cursor.GridPosition.Y) );
 		}
 
 		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 1, Cursor.GridPosition.Y + 1 + (gameBoard.ScrollProgress % 1), 1);

@@ -111,4 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b3c5efe561cc943be43bd331e560c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreboardText: {fileID: 0}
+  ScoreboardText: {fileID: 8119871366499461548, guid: bca95d0ff6412e9409f086840f5efa19,
+    type: 3}
+  RestartButton: {fileID: 8209800759747002799, guid: e1447d100050b8349a14a16711f97605,
+    type: 3}
+  MainMenuButton: {fileID: 967092700309231408, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+    type: 3}
+  QuitButton: {fileID: 7402400009151181277, guid: 7412ff09386056246a9a547a659832ee,
+    type: 3}

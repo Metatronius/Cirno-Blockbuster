@@ -7,6 +7,7 @@ public class SinglePlayerManager : MonoBehaviour
 {
     public MusicManager MusicManager;
     public ViewBoard ViewBoard;
+	
     private bool intense = false;
     private bool isGameOver = false;
 
@@ -22,27 +23,29 @@ public class SinglePlayerManager : MonoBehaviour
 		
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 
 		if (ViewBoard.StackHeight >= Nine.Core.Board.COLUMN_HEIGHT - 4 && !intense)
-        {
-            MusicManager.PlayTrack(MusicManager.IntenseThemeIntro, MusicManager.IntenseThemeLoop);
-            intense = true;
-        }
-        else if(ViewBoard.StackHeight < Nine.Core.Board.COLUMN_HEIGHT - 6 && intense)
-        {
-            MusicManager.PlayTrack(MusicManager.MainThemeIntro, MusicManager.MainThemeLoop);
-            intense = false;
-        }
+		{
+			MusicManager.PlayTrack(MusicManager.IntenseThemeIntro, MusicManager.IntenseThemeLoop);
+			intense = true;
+		}
+		else if (ViewBoard.StackHeight < Nine.Core.Board.COLUMN_HEIGHT - 6 && intense)
+		{
+			MusicManager.PlayTrack(MusicManager.MainThemeIntro, MusicManager.MainThemeLoop);
+			intense = false;
+		}
 
-        if(ViewBoard.IsGameOver && !isGameOver)
-        {
-            
-            MusicManager.PlayTrack(MusicManager.Loss, MusicManager.PostGameLoop);
-            isGameOver = true;
+		if (ViewBoard.IsGameOver && !isGameOver)
+		{
 
-        }
-    }
-}
+			MusicManager.PlayTrack(MusicManager.Loss, MusicManager.PostGameLoop);
+			isGameOver = true;
+
+			
+
+		}
+	}
+ }

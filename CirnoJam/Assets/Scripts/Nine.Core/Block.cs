@@ -22,9 +22,6 @@ namespace Nine.Core
 
 	public class Block
 	{
-		private float timeToClear = 0f;
-		private readonly Board board;
-
 		public BlockType Type { get; }
 		public (int X, int Y) Position { get; set; }
 		public BlockStatus Status { get; set; }
@@ -35,7 +32,6 @@ namespace Nine.Core
 			this.Type = type;
 			this.Position = (x, y);
 			this.Status = BlockStatus.Inactive;
-			this.board = board;
 		}
 	}
 }

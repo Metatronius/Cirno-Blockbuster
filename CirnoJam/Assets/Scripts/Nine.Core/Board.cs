@@ -116,9 +116,17 @@ namespace Nine.Core
 				}
 			}
 
-			ProcessMatches();
+			var matchBlocks = GetMatchBlocks();
+
+			foreach (var block in matchBlocks)
+			{
+				ClearBlock(block);
+			}
+
 			Score = 0;
 			BlocksCleared = 0;
+
+			AdjustScrollSpeed();
 		}
 
 		public void ShiftBlocksUp()
@@ -200,12 +208,8 @@ namespace Nine.Core
 
 		public void Swap((int X, int Y) pointA, (int X, int Y) pointB)
 		{
-			if((GetBlock(pointA) == null || GetBlock(pointA).CanSwap) && (GetBlock(pointB) == null || GetBlock(pointB).CanSwap))
-			{
-				SwapBlocks(pointA, pointB);
-				//ProcessMatches();
-				FillGaps();
-			}
+			SwapBlocks(pointA, pointB);
+			FillGaps();
 		}
 
 		public void Update(float deltaTime)
