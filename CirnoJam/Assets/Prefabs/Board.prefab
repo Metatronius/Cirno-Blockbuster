@@ -104,4 +104,4 @@ MonoBehaviour:
   SwapSound: {fileID: 8300000, guid: 488fee2d42a2e4c4599d7d2cdd860f48, type: 3}
   SwapErrorSound: {fileID: 8300000, guid: d1deab730e80dbf4cb46bb95619f46a7, type: 3}
   MatchMadeSound: {fileID: 8300000, guid: 8c89ddd5d160e2546853f77e082f956f, type: 3}
-  MatchClearSound: {fileID: 0}
+  MatchClearSound: {fileID: 8300000, guid: 8c89ddd5d160e2546853f77e082f956f, type: 3}
