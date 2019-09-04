@@ -5,6 +5,7 @@ using UnityEngine;
 public class SFXPlayer : MonoBehaviour
 {
 	private Queue<AudioSource> sources;
+	private bool sourceFlag = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -24,13 +25,21 @@ public class SFXPlayer : MonoBehaviour
 
 		sources = new Queue<AudioSource>();
 
-		sources.Enqueue(audioSources[0]);
-		sources.Enqueue(audioSources[1]);
+		if (sourceFlag)
+		{
+			sources.Enqueue(audioSources[0]);
+			sources.Enqueue(audioSources[1]);
+		}
+		else
+		{
+			sources.Enqueue(audioSources[1]);
+			sources.Enqueue(audioSources[0]);
+		}
+		sourceFlag = !sourceFlag;
 
 		var activeSource = sources.Dequeue();
 		sources.Enqueue(activeSource);
 
-		activeSource.Stop();
 		activeSource.clip = track;
 		activeSource.loop = false;
 		activeSource.Play();

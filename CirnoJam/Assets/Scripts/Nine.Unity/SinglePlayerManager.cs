@@ -42,9 +42,6 @@ public class SinglePlayerManager : MonoBehaviour
 
 			MusicManager.PlayTrack(MusicManager.Loss, MusicManager.PostGameLoop);
 			isGameOver = true;
-
-			
-
 		}
 	}
  }
