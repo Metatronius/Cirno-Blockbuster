@@ -120,7 +120,7 @@ public class ViewBoard : MonoBehaviour
 			this.Swap(Cursor.GridPosition, (Cursor.GridPosition.X+1, Cursor.GridPosition.Y) );
 		}
 
-		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 1, Cursor.GridPosition.Y + 1 + (gameBoard.ScrollProgress % 1), 1);
+		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 1, Cursor.GridPosition.Y + 1 + (gameBoard.ScrollProgress % 1), 0);
 	}
 
 	void sync()
