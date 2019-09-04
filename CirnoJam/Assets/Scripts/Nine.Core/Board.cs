@@ -10,6 +10,7 @@ namespace Nine.Core
 		public const int COLUMN_HEIGHT = 13;
 
 		private readonly Random rand = new Random();
+		private bool playMatchSound = false;
 
 		public float ScrollProgress { get; set; }
 		public float ScrollSpeed { get; private set; }
@@ -289,7 +290,15 @@ namespace Nine.Core
 
 			AdjustScrollSpeed();
 		}
-
+		public bool PlaySound()
+		{
+			if(playMatchSound)
+			{
+				playMatchSound = false;
+				return true;
+			}
+			return false;
+		}
 		private void AdjustScrollSpeed()
 		{
 			ScrollSpeed = 1/5f;
@@ -329,6 +338,7 @@ namespace Nine.Core
 				Score += (blockScore * blockScore) * 100U;
 
 				MatchedSets.Add(new MatchedSet(matchBlocks, 1, this));
+				playMatchSound = true;
 			}
 		}
 

@@ -37,7 +37,6 @@ public class SinglePlayerManager : MonoBehaviour
 			MusicManager.PlayTrack(MusicManager.MainThemeIntro, MusicManager.MainThemeLoop);
 			intense = false;
 		}
-
 		if (ViewBoard.IsGameOver && !isGameOver)
 		{
 

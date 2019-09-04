@@ -77,7 +77,10 @@ public class ViewBoard : MonoBehaviour
 		}
 
 		sync();
-
+		if(gameBoard.PlaySound())
+		{
+			SoundPlayer.PlayTrack(MatchMadeSound);
+		}
 		IsGameOver = gameBoard.GameOver;
 	}
 

@@ -64,7 +64,7 @@ MonoBehaviour:
   BlueBlockSprite: {fileID: 21300000, guid: 2ce6f296ca270744b878c217e0390cfa, type: 3}
   BlackBlockSprite: {fileID: 21300000, guid: 95193fa79a5b8024f92f43c431e3d9d0, type: 3}
   WhiteBlockSprite: {fileID: 21300000, guid: bbb51b209d0ea01418d373e61bb3c688, type: 3}
-  GarbageBlockSprite: {fileID: 0}
+  GarbageBlockSprite: {fileID: 21300000, guid: 66cecf5b39db8684dad76fa450b899e3, type: 3}
   InactivePinkBlockSprite: {fileID: 21300000, guid: a1b599426c2c277429813da18d57e571,
     type: 3}
   InactiveGreenBlockSprite: {fileID: 21300000, guid: a31c437b2bc92d1428c6cff24abb7f02,
@@ -75,4 +75,5 @@ MonoBehaviour:
     type: 3}
   InactiveWhiteBlockSprite: {fileID: 21300000, guid: 74afcfd85548a1d4db38ffb6e5f05f4d,
     type: 3}
-  InactiveGarbageBlockSprite: {fileID: 0}
+  InactiveGarbageBlockSprite: {fileID: 21300000, guid: 91022d17a1d80dd42b27c464b7ff2a98,
+    type: 3}
