@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,7 @@ public class ViewBoard : MonoBehaviour
 	private Sprite sprite;
 	private Transform position;
 	private List<ViewBlock> blocks;
+
 
 	public bool IsGameOver = false;
 	public ViewBlockFactory ViewBlockFactory;
@@ -20,6 +21,9 @@ public class ViewBoard : MonoBehaviour
 	public AudioClip SwapErrorSound;
 	public AudioClip MatchMadeSound;
 	public AudioClip MatchClearSound;
+	public List<Sprite> Backgrounds;
+	public List<Sprite> Frames;
+	public SpriteSelector Frame;
 
 	public int StackHeight => gameBoard.StackHeight;
 	public uint Score => gameBoard.Score;
@@ -28,10 +32,16 @@ public class ViewBoard : MonoBehaviour
 	// Start is called before the first frame update
 	public void Start()
 	{
-		sprite = this.GetComponent<Sprite>();
+		var rand = new System.Random();
+		int boardStyle = rand.Next(Backgrounds.Count);
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = Backgrounds[boardStyle];
+		Frame = GameObject.Instantiate(Frame);
+		Frame.SetSprite(Frames[boardStyle]);
+		Frame.transform.position = this.transform.position - new Vector3(0, 0, 4);
 		position = this.GetComponent<Transform>();
 		gameBoard = new Nine.Core.Board(ScrollSpeed);
 		blocks = new List<ViewBlock>();
+
 
 		for (int x = 0; x < Nine.Core.Board.ROW_WIDTH; x++)
 		{
@@ -46,7 +56,6 @@ public class ViewBoard : MonoBehaviour
 				}
 			}
 		}
-
 		Cursor = GameObject.Instantiate(Cursor);
 		SoundPlayer = GameObject.Instantiate(SoundPlayer);
 	}
@@ -120,7 +129,7 @@ public class ViewBoard : MonoBehaviour
 			this.Swap(Cursor.GridPosition, (Cursor.GridPosition.X+1, Cursor.GridPosition.Y) );
 		}
 
-		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 1, Cursor.GridPosition.Y + 1 + (gameBoard.ScrollProgress % 1), 0);
+		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 3, Cursor.GridPosition.Y + (gameBoard.ScrollProgress % 1), -2);
 	}
 
 	void sync()
@@ -148,7 +157,7 @@ public class ViewBoard : MonoBehaviour
 
 		foreach (var block in blocks)
 		{
-			block.transform.position = this.transform.position + new Vector3(block.Block.Position.X + 1, block.Block.Position.Y + 1 + (gameBoard.ScrollProgress % 1), 1);
+			block.transform.position = this.transform.position + new Vector3(block.Block.Position.X + 3, block.Block.Position.Y + (gameBoard.ScrollProgress % 1), -1);
 		}
 	}
 }

@@ -5,13 +5,15 @@ using UnityEngine;
 public class SFXPlayer : MonoBehaviour
 {
 	private Queue<AudioSource> sources;
-	private bool sourceFlag = false;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		var audioSources = GetComponents<AudioSource>();
 
-
+		sources = new Queue<AudioSource>();
+		sources.Enqueue(audioSources[0]);
+		sources.Enqueue(audioSources[1]);
 	}
 
 	// Update is called once per frame
@@ -21,22 +23,6 @@ public class SFXPlayer : MonoBehaviour
 
 	public void PlayTrack(AudioClip track)
 	{
-		var audioSources = GetComponents<AudioSource>();
-
-		sources = new Queue<AudioSource>();
-
-		if (sourceFlag)
-		{
-			sources.Enqueue(audioSources[0]);
-			sources.Enqueue(audioSources[1]);
-		}
-		else
-		{
-			sources.Enqueue(audioSources[1]);
-			sources.Enqueue(audioSources[0]);
-		}
-		sourceFlag = !sourceFlag;
-
 		var activeSource = sources.Dequeue();
 		sources.Enqueue(activeSource);
 

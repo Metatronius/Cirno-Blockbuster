@@ -47,5 +47,5 @@ MonoBehaviour:
     type: 3}
   ViewBoard: {fileID: 8776172976933189513, guid: 48934b734157478459839a4603ef6265,
     type: 3}
-  MenuCanvas: {fileID: 3511100151305849862, guid: 1b95560decd1d3445b346e9972c09539,
-    type: 3}
+  Mascot: {fileID: 1306744217998322718, guid: bad558387ec5b434cb556d90d980a8ac, type: 3}
+  Mascots: {fileID: 0}
