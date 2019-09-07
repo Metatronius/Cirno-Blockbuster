@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 4006052ee4542ca4f869f9c5ea8e1e3d
   - enabled: 1
-    path: Assets/Scenes/Marathon.unity
-    guid: dfd8c5a4247557d478b1184e6c080495
-  - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 889cf5f7e739db443bd8c7841af72bfe
+  - enabled: 1
+    path: Assets/Scenes/Marathon.unity
+    guid: dfd8c5a4247557d478b1184e6c080495
   m_configObjects: {}
