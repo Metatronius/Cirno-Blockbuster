@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGameOver: 0
+  IsPaused: 0
   ViewBlockFactory: {fileID: 7714072587359233663, guid: 572eaad945b577949a302e02419d7daa,
     type: 3}
   ScrollSpeed: 0.2
@@ -105,6 +106,7 @@ MonoBehaviour:
   SwapErrorSound: {fileID: 8300000, guid: d1deab730e80dbf4cb46bb95619f46a7, type: 3}
   MatchMadeSound: {fileID: 8300000, guid: 8c89ddd5d160e2546853f77e082f956f, type: 3}
   MatchClearSound: {fileID: 8300000, guid: 8c89ddd5d160e2546853f77e082f956f, type: 3}
+  PauseSound: {fileID: 8300000, guid: 13b04f72abb2e4440987af907aee772d, type: 3}
   Backgrounds:
   - {fileID: 21300000, guid: 55bf05b3cc26ab043a770495c3bd0c30, type: 3}
   Frames:

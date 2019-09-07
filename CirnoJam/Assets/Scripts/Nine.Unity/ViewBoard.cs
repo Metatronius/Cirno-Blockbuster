@@ -22,6 +22,7 @@ public class ViewBoard : MonoBehaviour
 	public AudioClip SwapErrorSound;
 	public AudioClip MatchMadeSound;
 	public AudioClip MatchClearSound;
+	public AudioClip PauseSound;
 	public List<Sprite> Backgrounds;
 	public List<Sprite> Frames;
 	public SpriteSelector Frame;
@@ -65,11 +66,11 @@ public class ViewBoard : MonoBehaviour
 		if(IsPaused)
 		{
 			this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -4);
+			SoundPlayer.PlayTrack(PauseSound);
 		}
 		else
 		{
 			this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
-
 		}
 	}
 
