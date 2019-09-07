@@ -11,6 +11,7 @@ public class ViewBoard : MonoBehaviour
 
 
 	public bool IsGameOver = false;
+	public bool IsPaused = false;
 	public ViewBlockFactory ViewBlockFactory;
 	public float ScrollSpeed;
 	public int PlayerIndex;
@@ -59,10 +60,26 @@ public class ViewBoard : MonoBehaviour
 		Cursor = GameObject.Instantiate(Cursor);
 		SoundPlayer = GameObject.Instantiate(SoundPlayer);
 	}
+	public void ToggleBackground()
+	{
+		if(IsPaused)
+		{
+			this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -4);
+		}
+		else
+		{
+			this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
+
+		}
+	}
 
 	// Update is called once per frame
 	public void Update()
 	{
+		if(IsPaused)
+		{
+			return;
+		}
 		if (IsGameOver)
 		{
 			return;

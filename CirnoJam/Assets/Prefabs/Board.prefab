@@ -108,5 +108,5 @@ MonoBehaviour:
   Backgrounds:
   - {fileID: 21300000, guid: 55bf05b3cc26ab043a770495c3bd0c30, type: 3}
   Frames:
-  - {fileID: 21300000, guid: 317981111cecb854cbc9a9e3a61df30e, type: 3}
+  - {fileID: 21300000, guid: 9e7b45d5608908045951474a388bda8f, type: 3}
   Frame: {fileID: 1306744217998322718, guid: bad558387ec5b434cb556d90d980a8ac, type: 3}

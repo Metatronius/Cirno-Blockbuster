@@ -10,8 +10,14 @@ public class SinglePlayerManager : MonoBehaviour
     public ViewBoard ViewBoard;
 	public SpriteSelector Mascot;
 	public Mascot Mascots;
-	
-    private bool intense = false;
+	public Button RestartButton;
+	public Button MainMenuButton;
+	public Button QuitButton;
+	public RawImage GameoverBackground;
+	private bool gameover = false;
+	private bool active = false;
+
+	private bool intense = false;
     private bool isGameOver = false;
 	private uint lastScore = 0;
 
@@ -22,7 +28,7 @@ public class SinglePlayerManager : MonoBehaviour
         MusicManager = GameObject.Instantiate(MusicManager);
         MusicManager.PlayTrack(MusicManager.MainThemeIntro, MusicManager.MainThemeLoop);
 
-        ViewBoard = GameObject.Instantiate(ViewBoard, new Vector3(-6, -8, 0), this.transform.rotation);
+        ViewBoard = GameObject.Instantiate(ViewBoard, new Vector3(-6, -7, 0), this.transform.rotation);
 
 		Mascot.SetSprite(Mascots.Normal);
 		
@@ -30,6 +36,18 @@ public class SinglePlayerManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (ViewBoard.IsGameOver && !gameover)
+		{
+			ToggleButtons();
+			GameoverBackground.gameObject.SetActive(true);
+			gameover = true;
+		}
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			ViewBoard.IsPaused = !ViewBoard.IsPaused;
+			ViewBoard.ToggleBackground();
+			ToggleButtons();
+		}
 		if(ViewBoard.Score != lastScore)
 		{
 			lastScore = ViewBoard.Score;
@@ -54,4 +72,12 @@ public class SinglePlayerManager : MonoBehaviour
 			isGameOver = true;
 		}
 	}
- }
+	public void ToggleButtons()
+	{
+		active = !active;
+		RestartButton.gameObject.SetActive(active);
+		MainMenuButton.gameObject.SetActive(active);
+		QuitButton.gameObject.SetActive(active);
+
+	}
+}

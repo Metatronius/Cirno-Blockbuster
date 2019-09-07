@@ -5,13 +5,13 @@ using UnityEngine;
 public class SpriteSelector : MonoBehaviour
 {
     private float spriteTimer = 0;
-	private Sprite lastSprite;
+	//private Sprite lastSprite;
 	private Sprite defaultSprite;
 	private bool timing = false;
 	public void SetSprite(Sprite s)
 	{
 		defaultSprite = s;
-		lastSprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
+		// lastSprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = defaultSprite;
 	}
 	public void SetSprite(Sprite s, float Time)
@@ -22,7 +22,7 @@ public class SpriteSelector : MonoBehaviour
 	}
 	public void TransitionSprites(Sprite a, float Time, Sprite b)
 	{
-		lastSprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
+		// lastSprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = a;
 		defaultSprite = b;
 		spriteTimer = Time;
