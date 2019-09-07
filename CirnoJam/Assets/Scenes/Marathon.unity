@@ -425,8 +425,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -564, y: -60}
-  m_SizeDelta: {x: 500, y: 200}
+  m_AnchoredPosition: {x: -570, y: -60}
+  m_SizeDelta: {x: 450, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351509637
 MonoBehaviour:
@@ -1405,6 +1405,16 @@ PrefabInstance:
       propertyPath: GameoverBackground
       value: 
       objectReference: {fileID: 720006144}
+    - target: {fileID: 7947051266604031842, guid: b04bb7a0f0f9b76499e6e81c361e4340,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947051266604031842, guid: b04bb7a0f0f9b76499e6e81c361e4340,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 640094474}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b04bb7a0f0f9b76499e6e81c361e4340, type: 3}
 --- !u!114 &1829275451 stripped
