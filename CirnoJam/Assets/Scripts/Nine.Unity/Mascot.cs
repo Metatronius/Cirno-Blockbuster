@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Mascot : MonoBehaviour
 {
-	public Sprite normal;
-	public Sprite angry;
-	public Sprite determined;
-	public Sprite cheer;
-	public Sprite surprised;
+	public Sprite Normal;
+	public Sprite Angry;
+	public Sprite Determined;
+	public Sprite Cheer;
+	public Sprite Surprised;
 }

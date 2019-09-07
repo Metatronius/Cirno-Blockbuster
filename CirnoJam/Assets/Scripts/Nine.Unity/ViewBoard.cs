@@ -129,7 +129,7 @@ public class ViewBoard : MonoBehaviour
 			this.Swap(Cursor.GridPosition, (Cursor.GridPosition.X+1, Cursor.GridPosition.Y) );
 		}
 
-		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 3, Cursor.GridPosition.Y + (gameBoard.ScrollProgress % 1), -2);
+		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 3, Cursor.GridPosition.Y +.4f + (gameBoard.ScrollProgress % 1), -2);
 	}
 
 	void sync()
@@ -157,7 +157,7 @@ public class ViewBoard : MonoBehaviour
 
 		foreach (var block in blocks)
 		{
-			block.transform.position = this.transform.position + new Vector3(block.Block.Position.X + 3, block.Block.Position.Y + (gameBoard.ScrollProgress % 1), -1);
+			block.transform.position = this.transform.position + new Vector3(block.Block.Position.X + 3, block.Block.Position.Y +.4f + (gameBoard.ScrollProgress % 1), -1);
 		}
 	}
 }

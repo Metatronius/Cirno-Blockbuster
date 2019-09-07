@@ -6,22 +6,25 @@ public class SpriteSelector : MonoBehaviour
 {
     private float spriteTimer = 0;
 	private Sprite lastSprite;
+	private Sprite defaultSprite;
 	private bool timing = false;
 	public void SetSprite(Sprite s)
 	{
-		lastSprite = this.GetComponent<SpriteRenderer>().sprite;
-		this.gameObject.GetComponent<SpriteRenderer>().sprite = s;
+		defaultSprite = s;
+		lastSprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = defaultSprite;
 	}
 	public void SetSprite(Sprite s, float Time)
 	{
-		SetSprite(s);
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = s;
 		spriteTimer = Time;
 		timing = true;
 	}
 	public void TransitionSprites(Sprite a, float Time, Sprite b)
 	{
+		lastSprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = a;
-		lastSprite = b;
+		defaultSprite = b;
 		spriteTimer = Time;
 		timing = true;
 	}
@@ -35,7 +38,7 @@ public class SpriteSelector : MonoBehaviour
 			}
 			else
 			{
-				SetSprite(lastSprite);
+				this.gameObject.GetComponent<SpriteRenderer>().sprite = defaultSprite;
 				timing = false;
 			}
 		}

@@ -7,7 +7,7 @@ namespace Nine.Core
 	public class Board : IUpdatable
 	{
 		public const int ROW_WIDTH = 6;
-		public const int COLUMN_HEIGHT = 13;
+		public const int COLUMN_HEIGHT = 14;
 
 		private readonly Random rand = new Random();
 		private bool playMatchSound = false;
