@@ -18,6 +18,7 @@ namespace Nine.Core
 		public int BlocksCleared { get; private set; } = 0;
 		public Block[][] Blocks { get; set; } // Blocks are accessed by Blocks[y][x]
 		public List<Nine.Core.MatchedSet> MatchedSets { get; set; }
+		public ComboMeter ComboMeter;
 
 		public bool GameOver
 		{
@@ -83,6 +84,8 @@ namespace Nine.Core
 		{
 			this.MatchedSets = new List<MatchedSet>();
 			this.ScrollSpeed = scrollSpeed;
+			this.ComboMeter = new ComboMeter(5f);
+			this.ComboMeter.MeterDepleted += OnComboEnd;
 			this.Initialize();
 		}
 
@@ -215,6 +218,8 @@ namespace Nine.Core
 
 		public void Update(float deltaTime)
 		{
+			ComboMeter.Update(deltaTime);
+
 			foreach (var set in MatchedSets)
 			{
 				set.Update(deltaTime);
@@ -290,6 +295,22 @@ namespace Nine.Core
 
 			AdjustScrollSpeed();
 		}
+
+		public void ClearMatch(MatchedSet match)
+		{
+			ComboMeter.AddCombo();
+
+			foreach (var block in match.Blocks)
+			{
+				ClearBlock(block);
+			}
+		}
+
+		private void OnComboEnd(object sender, int combo)
+		{
+
+		}
+
 		public bool PlaySound()
 		{
 			if(playMatchSound)

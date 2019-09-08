@@ -30,6 +30,9 @@ public class ViewBoard : MonoBehaviour
 	public int StackHeight => gameBoard.StackHeight;
 	public uint Score => gameBoard.Score;
 	public int BlocksCleared => gameBoard.BlocksCleared;
+	public float ComboTimeMax => gameBoard.ComboMeter.MeterTimeMax;
+	public float ComboTimeRemaining => gameBoard.ComboMeter.MeterTimeRemaining;
+	public int CurrentCombo => gameBoard.ComboMeter.Combo;
 
 	// Start is called before the first frame update
 	public void Start()
@@ -147,7 +150,7 @@ public class ViewBoard : MonoBehaviour
 			this.Swap(Cursor.GridPosition, (Cursor.GridPosition.X+1, Cursor.GridPosition.Y) );
 		}
 
-		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 3, Cursor.GridPosition.Y +.4f + (gameBoard.ScrollProgress % 1), -2);
+		Cursor.transform.position = this.transform.position + new Vector3(Cursor.GridPosition.X + 3f, Cursor.GridPosition.Y + 1 + (gameBoard.ScrollProgress % 1), -2);
 	}
 
 	void sync()
@@ -175,7 +178,7 @@ public class ViewBoard : MonoBehaviour
 
 		foreach (var block in blocks)
 		{
-			block.transform.position = this.transform.position + new Vector3(block.Block.Position.X + 3, block.Block.Position.Y +.4f + (gameBoard.ScrollProgress % 1), -1);
+			block.transform.position = this.transform.position + new Vector3(block.Block.Position.X + 3f, block.Block.Position.Y + 1 + (gameBoard.ScrollProgress % 1), -1);
 		}
 	}
 }
