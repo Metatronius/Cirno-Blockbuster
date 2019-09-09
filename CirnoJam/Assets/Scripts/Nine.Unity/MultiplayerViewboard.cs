@@ -203,21 +203,28 @@ public class MultiplayerViewboard : MonoBehaviourPunCallbacks
 					}
 					else
 					{
-						PV.RPC("UpdateBlock", RpcTarget.Others, y, x, -1);
+						PV.RPC("UpdateBlock", RpcTarget.Others, y, x, null);
 					}
 				}
 			}
 	}
 	[PunRPC]
-	public void UpdateBlock(int y, int x, int type)
+	public void UpdateBlock(int y, int x, int? type)
 	{
-		if(type == -1)
+		if(type == null)
 		{
 			this.gameBoard.Blocks[y][x] = null;
 		}
 		else
 		{
-			this.gameBoard.Blocks[y][x].SetTypeAsInt(type);
+			if(this.gameBoard.Blocks[y][x] != null)
+			{
+				this.gameBoard.Blocks[y][x].SetTypeAsInt((int)type);
+			}
+			else
+			{
+				this.gameBoard.Blocks[y][x] = new Nine.Core.Block(x, y, (Nine.Core.BlockType)type, this.gameBoard, true);
+			}
 		}
 	}
 	void sync()

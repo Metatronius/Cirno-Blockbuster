@@ -33,6 +33,19 @@ namespace Nine.Core
 			this.Position = (x, y);
 			this.Status = BlockStatus.Inactive;
 		}
+		public Block(int x, int y, BlockType type, Board board, bool active)
+		{
+			this.Type = type;
+			this.Position = (x, y);
+			if (active)
+			{
+				this.Status = BlockStatus.Active;
+			}
+			else
+			{
+				this.Status = BlockStatus.Inactive;
+			}
+		}
 		public int GetTypeAsInt()
 		{
 			return (int)Type;

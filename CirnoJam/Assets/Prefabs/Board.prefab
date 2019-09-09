@@ -98,7 +98,6 @@ MonoBehaviour:
   ViewBlockFactory: {fileID: 7714072587359233663, guid: 572eaad945b577949a302e02419d7daa,
     type: 3}
   ScrollSpeed: 0.2
-  PlayerIndex: 1
   Cursor: {fileID: 141477964020403849, guid: 58f94432d1449c34e9ec02b03e30b07b, type: 3}
   SoundPlayer: {fileID: -4597005968553616822, guid: 2d75bb6dd72ad654ca9a5ebd065d8053,
     type: 3}
@@ -110,7 +109,9 @@ MonoBehaviour:
   Backgrounds:
   - {fileID: 21300000, guid: 55bf05b3cc26ab043a770495c3bd0c30, type: 3}
   - {fileID: 21300000, guid: 9c00f574664b7d84db8d3993d3b6ce4b, type: 3}
+  - {fileID: 21300000, guid: ab3f4b8727de2aa4689f495a53a54218, type: 3}
   Frames:
   - {fileID: 21300000, guid: 9e7b45d5608908045951474a388bda8f, type: 3}
   - {fileID: 21300000, guid: 22077e0617e93274e829b38bf5595a29, type: 3}
+  - {fileID: 21300000, guid: c0a8d0888c8f375478b1bfb5cedfdf5b, type: 3}
   Frame: {fileID: 1306744217998322718, guid: bad558387ec5b434cb556d90d980a8ac, type: 3}
