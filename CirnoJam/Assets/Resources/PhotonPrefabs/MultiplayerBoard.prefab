@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6008987447020765239
+--- !u!1 &6322285140530870800
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6008987447020765242}
-  - component: {fileID: 6008987447020765241}
-  - component: {fileID: 6008987447020765240}
-  - component: {fileID: 6008987447020765243}
+  - component: {fileID: 2716839628878036556}
+  - component: {fileID: 7191239693058872638}
+  - component: {fileID: 9155856843870962264}
+  - component: {fileID: -3150956378094172274}
   m_Layer: 0
-  m_Name: Cirno
+  m_Name: MultiplayerBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6008987447020765242
+--- !u!4 &2716839628878036556
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6008987447020765239}
+  m_GameObject: {fileID: 6322285140530870800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: -1, z: 0}
+  m_LocalPosition: {x: -21, y: 10, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6008987447020765241
+--- !u!212 &7191239693058872638
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6008987447020765239}
+  m_GameObject: {fileID: 6322285140530870800}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -71,43 +71,68 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 32c5009062eeb514c99eb0d4af7a92e9, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 11.75, y: 12.88}
+  m_Size: {x: 10, y: 20}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6008987447020765240
+--- !u!114 &9155856843870962264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6008987447020765239}
+  m_GameObject: {fileID: 6322285140530870800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cb0f7c55354593449a81b4627f522c9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Normal: {fileID: 21300000, guid: 32c5009062eeb514c99eb0d4af7a92e9, type: 3}
-  Angry: {fileID: 21300000, guid: 81fc0ee0315ceb54db9011d0ec174306, type: 3}
-  Determined: {fileID: 21300000, guid: 8982ef411381c604babb2c10c912d203, type: 3}
-  Cheer: {fileID: 21300000, guid: 30cdf336bb08f76449ea6352886ade55, type: 3}
-  Surprised: {fileID: 21300000, guid: 750cbe10bfe71154bb11779a8d5de5f4, type: 3}
---- !u!114 &6008987447020765243
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-3150956378094172274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6008987447020765239}
+  m_GameObject: {fileID: 6322285140530870800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d310517a7f8871e4ebf5d48ef247e764, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c6b9609f2bb99242963eca9d0622b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGameOver: 0
+  IsPaused: 0
+  ViewBlockFactory: {fileID: 7714072587359233663, guid: 572eaad945b577949a302e02419d7daa,
+    type: 3}
+  ScrollSpeed: 0.2
+  Cursor: {fileID: 141477964020403849, guid: 58f94432d1449c34e9ec02b03e30b07b, type: 3}
+  SoundPlayer: {fileID: -4597005968553616822, guid: 2d75bb6dd72ad654ca9a5ebd065d8053,
+    type: 3}
+  SwapSound: {fileID: 8300000, guid: 488fee2d42a2e4c4599d7d2cdd860f48, type: 3}
+  SwapErrorSound: {fileID: 8300000, guid: d1deab730e80dbf4cb46bb95619f46a7, type: 3}
+  MatchMadeSound: {fileID: 8300000, guid: 8c89ddd5d160e2546853f77e082f956f, type: 3}
+  MatchClearSound: {fileID: 8300000, guid: 8c89ddd5d160e2546853f77e082f956f, type: 3}
+  PauseSound: {fileID: 8300000, guid: 13b04f72abb2e4440987af907aee772d, type: 3}
+  Backgrounds:
+  - {fileID: 21300000, guid: 9c00f574664b7d84db8d3993d3b6ce4b, type: 3}
+  - {fileID: 21300000, guid: 55bf05b3cc26ab043a770495c3bd0c30, type: 3}
+  Frames:
+  - {fileID: 21300000, guid: 22077e0617e93274e829b38bf5595a29, type: 3}
+  - {fileID: 21300000, guid: 9e7b45d5608908045951474a388bda8f, type: 3}
+  Frame: {fileID: 1306744217998322718, guid: bad558387ec5b434cb556d90d980a8ac, type: 3}

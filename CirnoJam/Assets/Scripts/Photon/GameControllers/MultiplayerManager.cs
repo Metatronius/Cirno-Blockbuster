@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-using System.Collections;
 using System.IO;
 
-public class MultiplayerManager : MonoBehaviour
+public class MultiplayerManager : MonoBehaviourPunCallbacks
 {
-	public MusicManager MusicManager;
-	public ViewBoard ViewBoard;
+	public MultiplayerViewboard MultiplayerViewboard;
 	public SpriteSelector Mascot;
 	public Mascot Mascots;
 	public Button RestartButton;
@@ -18,22 +16,22 @@ public class MultiplayerManager : MonoBehaviour
 	public RawImage GameoverBackground;
 	public GameObject myBoard;
 
-
+	private GamestateManager Manager;
+	private int connectedClients = 0;
 	private PhotonView PV;
 	private bool gameover = false;
 	private bool active = false;
 	private bool intense = false;
-	private bool isGameOver = false;
 	private int playerNumber;
 	private uint lastScore = 0;
+
 
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		PV = GetComponent<PhotonView>();
-		MusicManager = GameObject.Instantiate(MusicManager);
-		MusicManager.PlayTrack(MusicManager.MainThemeIntro, MusicManager.MainThemeLoop);
+		
 
 		if (PhotonNetwork.NickName.Equals("1"))
 		{
@@ -45,18 +43,38 @@ public class MultiplayerManager : MonoBehaviour
 		}
 		if (PV.IsMine)
 		{
-			myBoard = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MultiplayerBoard"), GameSetup.GS.spawnPoints[playerNumber-1].position, GameSetup.GS.spawnPoints[playerNumber-1].rotation, 0);
+			myBoard = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MultiplayerBoard"), GameSetup.GS.spawnPoints[playerNumber - 1].position, GameSetup.GS.spawnPoints[playerNumber - 1].rotation, 0);
+			MultiplayerViewboard = myBoard.GetComponent<MultiplayerViewboard>();
+
+			myBoard.GetComponent<PhotonView>().RPC("Initialize", RpcTarget.All, (PhotonNetwork.CurrentRoom.GetHashCode()));
+			Mascot.SetSprite(Mascots.Normal);
+			Manager = FindObjectOfType<GamestateManager>();
+			Manager.GetComponent<PhotonView>().RPC("Register", RpcTarget.All);
 		}
+		
 
-		ViewBoard = GameObject.Instantiate(ViewBoard, this.transform.position, this.transform.rotation);
-
-		Mascot.SetSprite(Mascots.Normal);
-
+		//MultiplayerViewboard = GameObject.Instantiate(MultiplayerViewboard, this.transform.position, this.transform.rotation);
+		
 	}
+
+	//[PunRPC]
+	//public void Connect()
+	//{
+	//	connectedClients++;
+	//	if(connectedClients >= 2)
+	//	{
+	//		myBoard.GetComponent<PhotonView>().RPC("Unpause", RpcTarget.All);
+	//	}
+	//}
+
 	// Update is called once per frame
 	void Update()
 	{
-		if (ViewBoard.IsGameOver && !gameover)
+		if(MultiplayerViewboard == null)
+		{
+			return;
+		}
+		if (MultiplayerViewboard.IsGameOver && !Manager.IsGameOver)
 		{
 			ToggleButtons();
 			GameoverBackground.gameObject.SetActive(true);
@@ -66,28 +84,28 @@ public class MultiplayerManager : MonoBehaviour
 		{
 			ToggleButtons();
 		}
-		if (ViewBoard.Score != lastScore)
+		if (MultiplayerViewboard.Score != lastScore)
 		{
-			lastScore = ViewBoard.Score;
+			lastScore = MultiplayerViewboard.Score;
 			Mascot.SetSprite(Mascots.Cheer, 1f);
 		}
-		if (ViewBoard.StackHeight >= Nine.Core.Board.COLUMN_HEIGHT - 4 && !intense)
+		if (MultiplayerViewboard.StackHeight >= Nine.Core.Board.COLUMN_HEIGHT - 4 && !Manager.intense)
 		{
-			MusicManager.PlayTrack(MusicManager.IntenseThemeIntro, MusicManager.IntenseThemeLoop);
+			Manager.MusicManager.PlayTrack(Manager.MusicManager.IntenseThemeIntro, Manager.MusicManager.IntenseThemeLoop);
 			Mascot.TransitionSprites(Mascots.Surprised, 2, Mascots.Angry);
-			intense = true;
+			Manager.intense = true;
 		}
-		else if (ViewBoard.StackHeight < Nine.Core.Board.COLUMN_HEIGHT - 6 && intense)
+		else if (MultiplayerViewboard.StackHeight < Nine.Core.Board.COLUMN_HEIGHT - 6 && Manager.intense)
 		{
-			MusicManager.PlayTrack(MusicManager.MainThemeIntro, MusicManager.MainThemeLoop);
+			Manager.MusicManager.PlayTrack(Manager.MusicManager.MainThemeIntro, Manager.MusicManager.MainThemeLoop);
 			Mascot.TransitionSprites(Mascots.Determined, 2, Mascots.Normal);
-			intense = false;
+			Manager.intense = false;
 		}
-		if (ViewBoard.IsGameOver && !isGameOver)
+		if (MultiplayerViewboard.IsGameOver && !Manager.IsGameOver)
 		{
 
-			MusicManager.PlayTrack(MusicManager.Loss, MusicManager.PostGameLoop);
-			isGameOver = true;
+			Manager.MusicManager.PlayTrack(Manager.MusicManager.Loss, Manager.MusicManager.PostGameLoop);
+			Manager.IsGameOver = true;
 		}
 	}
 	public void ToggleButtons()
@@ -97,4 +115,5 @@ public class MultiplayerManager : MonoBehaviour
 		QuitButton.gameObject.SetActive(active);
 
 	}
+	
 }

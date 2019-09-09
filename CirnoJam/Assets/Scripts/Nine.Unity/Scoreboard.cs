@@ -19,7 +19,7 @@ public class Scoreboard : MonoBehaviour
     void Update()
     {
 		ViewBoard = FindObjectOfType<ViewBoard>();
-		ScoreboardText.text = $"Score: { ViewBoard.Score }\nBlocks Cleared: { ViewBoard.BlocksCleared }\nCombo: { ViewBoard.CurrentCombo }\nCombo Timer: { ViewBoard.ComboTimeRemaining }/{ ViewBoard.ComboTimeMax }";
+		ScoreboardText.text = $"Score: { ViewBoard.Score }\nBlocks Cleared: { ViewBoard.BlocksCleared }\nCombo: { ViewBoard.CurrentCombo }\nCombo Timer: { (ViewBoard.ComboTimeRemaining == 0 ? "-" : ViewBoard.ComboTimeRemaining.ToString("0.00")) }";
 		
 
 	}

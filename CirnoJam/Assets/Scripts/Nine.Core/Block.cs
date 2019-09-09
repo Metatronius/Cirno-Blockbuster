@@ -22,7 +22,7 @@ namespace Nine.Core
 
 	public class Block
 	{
-		public BlockType Type { get; }
+		public BlockType Type { get; private set; }
 		public (int X, int Y) Position { get; set; }
 		public BlockStatus Status { get; set; }
 		public bool CanSwap => this.Status == BlockStatus.Active;
@@ -32,6 +32,14 @@ namespace Nine.Core
 			this.Type = type;
 			this.Position = (x, y);
 			this.Status = BlockStatus.Inactive;
+		}
+		public int GetTypeAsInt()
+		{
+			return (int)Type;
+		}
+		public void SetTypeAsInt(int type)
+		{
+			this.Type = (BlockType)type;
 		}
 	}
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1525326418092206103}
   - component: {fileID: 3470799936262581735}
-  - component: {fileID: 8239378803586443988}
+  - component: {fileID: 7227630569438965447}
   m_Layer: 0
   m_Name: PhotonNetworkPlayer
   m_TagString: Untagged
@@ -54,7 +54,7 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8239378803586443988
+--- !u!114 &7227630569438965447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,7 +63,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5587203078162173479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbaa84ff44c8d914387a9574a89310fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 45d2cc935657930418c94672ee5dab8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myAvatar: {fileID: 0}
+  MultiplayerViewboard: {fileID: 0}
+  Mascot: {fileID: 6008987447020765243, guid: 9c09fb566df122346ad188df0402cfaa, type: 3}
+  Mascots: {fileID: 6008987447020765240, guid: 9c09fb566df122346ad188df0402cfaa, type: 3}
+  RestartButton: {fileID: 8209800759747002799, guid: e1447d100050b8349a14a16711f97605,
+    type: 3}
+  MainMenuButton: {fileID: 967092700309231408, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+    type: 3}
+  QuitButton: {fileID: 7402400009151181277, guid: 7412ff09386056246a9a547a659832ee,
+    type: 3}
+  GameoverBackground: {fileID: 7049056743053749313, guid: 6b3558f92daba914f8fcc7c68fb09546,
+    type: 3}
+  myBoard: {fileID: 0}

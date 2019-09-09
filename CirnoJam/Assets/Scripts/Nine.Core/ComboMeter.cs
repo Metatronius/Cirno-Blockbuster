@@ -44,6 +44,7 @@ namespace Nine.Core
 				}
 				
 				Combo = 0;
+				MeterTimeRemaining = 0;
 			}
 		}
 	}

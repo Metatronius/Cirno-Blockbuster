@@ -9,7 +9,7 @@ namespace Nine.Core
 		public const int ROW_WIDTH = 6;
 		public const int COLUMN_HEIGHT = 14;
 
-		private readonly Random rand = new Random();
+		private  Random rand;
 		private bool playMatchSound = false;
 
 		public float ScrollProgress { get; set; }
@@ -43,7 +43,7 @@ namespace Nine.Core
 				return 0;
 			}
 		}
-
+		 
 		public IEnumerable<Block> AllBlocks
 		{
 			get
@@ -80,12 +80,13 @@ namespace Nine.Core
 			}
 		}
 
-		public Board(float scrollSpeed) //Constructor
+		public Board(float scrollSpeed, int seed) //Constructor
 		{
 			this.MatchedSets = new List<MatchedSet>();
 			this.ScrollSpeed = scrollSpeed;
 			this.ComboMeter = new ComboMeter(5f);
 			this.ComboMeter.MeterDepleted += OnComboEnd;
+			this.rand = new System.Random(seed);
 			this.Initialize();
 		}
 
@@ -165,6 +166,7 @@ namespace Nine.Core
 
 			ProcessMatches();
 		}
+		
 
 		public Block[] GetNewRow(int y)
 		{
@@ -189,7 +191,7 @@ namespace Nine.Core
 
 			return row;
 		}
-
+		
 		private void SwapBlocks((int X, int Y) pointA, (int X, int Y) pointB)
 		{
 			var blockA = Blocks[pointA.Y][pointA.X];

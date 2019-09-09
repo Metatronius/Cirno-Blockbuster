@@ -11,7 +11,6 @@ public class Cursor : MonoBehaviour
     void Start()
     {
         GridPosition = (2, 3);
-        var boards = FindObjectsOfType<ViewBoard>();
     }
 
     // Update is called once per frame
@@ -23,4 +22,8 @@ public class Cursor : MonoBehaviour
     {
         this.GridPosition = (this.GridPosition.X + dx, this.GridPosition.Y + dy);
     }
+	public void SetPosition(int x, int y)
+	{
+		this.GridPosition = (x, y);
+	}
 }

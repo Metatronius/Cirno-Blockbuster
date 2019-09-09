@@ -26,10 +26,11 @@ public class SinglePlayerManager : MonoBehaviour
 	void Start()
     {
         MusicManager = GameObject.Instantiate(MusicManager);
-        MusicManager.PlayTrack(MusicManager.MainThemeIntro, MusicManager.MainThemeLoop);
+		MusicManager.PlayTrack(MusicManager.MainThemeIntro, MusicManager.MainThemeLoop);
 
         ViewBoard = GameObject.Instantiate(ViewBoard, new Vector3(-6, -7, 0), this.transform.rotation);
 
+		ViewBoard.Initialize(new System.Random().Next());
 		Mascot.SetSprite(Mascots.Normal);
 		
     }
