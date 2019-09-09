@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VS.unity
     guid: 3bce9fcd427e91b49aeebc943cc9fab5
+  - enabled: 1
+    path: Assets/Scenes/VolumeControl.unity
+    guid: 53919fd459ba0984681dfc052896b9e4
   m_configObjects: {}

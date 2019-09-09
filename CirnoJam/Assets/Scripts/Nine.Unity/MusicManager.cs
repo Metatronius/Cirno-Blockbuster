@@ -6,7 +6,8 @@ public class MusicManager : MonoBehaviour
 {
     private AudioSource introSource;
     private AudioSource loopSource;
-    public AudioClip MainThemeIntro;
+	private float volume;
+	public AudioClip MainThemeIntro;
     public AudioClip MainThemeLoop;
     public AudioClip IntenseThemeIntro;
     public AudioClip IntenseThemeLoop;
@@ -18,10 +19,19 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		volume = PlayerPrefs.GetFloat("MusicVolume");
 
-        
-    }
 
+	}
+	public void SetVolume(float v)
+	{
+		volume = v;
+		var sources = GetComponents<AudioSource>();
+		foreach(AudioSource s in sources)
+		{
+			s.volume = volume;
+		}
+	}
     // Update is called once per frame
     void Update()
     {
@@ -43,8 +53,8 @@ public class MusicManager : MonoBehaviour
         loopSource.clip = loop;
 
         var introDuration = (double)intro.samples / intro.frequency;
-        introSource.volume = .5f;
-        loopSource.volume = .5f;
+		introSource.volume = volume;
+        loopSource.volume = volume;
         introSource.Play();
         loopSource.PlayScheduled(AudioSettings.dspTime + introDuration);
     }
