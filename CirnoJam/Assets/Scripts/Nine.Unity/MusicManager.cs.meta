@@ -3,7 +3,15 @@ guid: 40c7f560517a4bb439ee2340bd0c5960
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - MainThemeIntro: {fileID: 8300000, guid: 75e291a835436e84f9415fb951621294, type: 3}
+  - MainThemeLoop: {fileID: 8300000, guid: 2a8a5b9f877db024482da8a12d60912f, type: 3}
+  - IntenseThemeIntro: {fileID: 8300000, guid: 16d6093faeb592449b9592340eee7e8c, type: 3}
+  - IntenseThemeLoop: {fileID: 8300000, guid: 598b5d195471d2a41ae16bea5c165d8f, type: 3}
+  - Victory: {fileID: 8300000, guid: 3db6011fd1c09d44f96b00df87a021e5, type: 3}
+  - Loss: {fileID: 8300000, guid: dde98585ce99c4146bb77705bbda6dfb, type: 3}
+  - PostGameIntro: {fileID: 8300000, guid: a13332e245818cf4bb0f94ab52e15b92, type: 3}
+  - PostGameLoop: {fileID: 8300000, guid: caadcf128a953c1489db2b693d066cee, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

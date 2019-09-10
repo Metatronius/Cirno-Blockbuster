@@ -19,9 +19,7 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		volume = PlayerPrefs.GetFloat("MusicVolume");
-
-
+		SetVolume(PlayerPrefs.GetFloat("MusicVolume"));
 	}
 	public void SetVolume(float v)
 	{

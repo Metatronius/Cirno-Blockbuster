@@ -9,7 +9,8 @@ public class SFXPlayer : MonoBehaviour
 
 
 	// Start is called before the first frame update
-	void Awake()
+	void Awake
+		()
 	{
 		volume = PlayerPrefs.GetFloat("SFXVolume");
 		var audioSources = GetComponents<AudioSource>();
