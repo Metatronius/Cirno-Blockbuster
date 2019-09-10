@@ -11,6 +11,8 @@ namespace Nine.Core
 
 		private  Random rand;
 		private bool playMatchSound = false;
+		private bool linear = false;
+		private int sinceLastIncrease = 0;
 
 		public float ScrollProgress { get; set; }
 		public float ScrollSpeed { get; private set; }
@@ -324,7 +326,22 @@ namespace Nine.Core
 		}
 		private void AdjustScrollSpeed()
 		{
-			ScrollSpeed = 1/5f;
+			if(linear)
+			{
+				if(BlocksCleared - sinceLastIncrease > 120)
+				{
+					ScrollSpeed += 0.01f;
+					sinceLastIncrease = BlocksCleared;
+				}
+				return;
+			}
+			if (BlocksCleared > 360)
+			{
+				ScrollSpeed += .01f;
+				linear = true;
+				return;
+			}
+			ScrollSpeed = 2/5f;
 
 			if (BlocksCleared > 10)
 			{
@@ -346,10 +363,7 @@ namespace Nine.Core
 			{
 				ScrollSpeed = 2/5f;
 			}
-			if (BlocksCleared > 360)
-			{
-				ScrollSpeed = ((((BlocksCleared-360)/120) + 1) * 6) +40/100f;
-			}
+			
 		}
 
 		private void ProcessMatches()
