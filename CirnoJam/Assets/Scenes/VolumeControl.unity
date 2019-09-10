@@ -822,6 +822,28 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PlayTrack
       objectReference: {fileID: 0}
+    - target: {fileID: 967092700309231408, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+        type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 967092700309231408, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+        type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 70ffed7ceeeac24478ccd3a0eb68990e,
+        type: 3}
+    - target: {fileID: 5031740501889911794, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 948d21da6ef5eea4889a93538b7b20ca,
+        type: 3}
+    - target: {fileID: 5031740501889911794, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6492391397352285845, guid: 424384d99c6c2ec47b55ef49fc53dc31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -935,12 +957,27 @@ PrefabInstance:
     - target: {fileID: 269826942989792541, guid: 424384d99c6c2ec47b55ef49fc53dc31,
         type: 3}
       propertyPath: m_FontData.m_MaxSize
-      value: 300
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 269826942989792541, guid: 424384d99c6c2ec47b55ef49fc53dc31,
         type: 3}
       propertyPath: m_Text
       value: Return to Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 269826942989792541, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 269826942989792541, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 269826942989792541, guid: 424384d99c6c2ec47b55ef49fc53dc31,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 424384d99c6c2ec47b55ef49fc53dc31, type: 3}

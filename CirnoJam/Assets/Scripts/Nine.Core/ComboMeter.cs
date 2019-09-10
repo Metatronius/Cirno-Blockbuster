@@ -21,9 +21,11 @@ namespace Nine.Core
 		{
 			if (MeterTimeRemaining <= 0)
 			{
-				MeterTimeRemaining = MeterTimeMax;Combo++;
+				MeterTimeRemaining = MeterTimeMax;
+				Combo++;
 			}
-			
+
+			MeterTimeRemaining += .5f;
 			Combo++;
 		}
 

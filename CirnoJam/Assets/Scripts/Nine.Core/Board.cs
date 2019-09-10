@@ -346,6 +346,10 @@ namespace Nine.Core
 			{
 				ScrollSpeed = 2/5f;
 			}
+			if (BlocksCleared > 360)
+			{
+				ScrollSpeed = ((((BlocksCleared-360)/120) + 1) * 6) +40/100f;
+			}
 		}
 
 		private void ProcessMatches()
@@ -358,7 +362,7 @@ namespace Nine.Core
 			{
 				uint blockScore = (uint)(blocksToClear - 2);
 
-				Score += (blockScore * blockScore) * 100U;
+				Score += (blockScore * blockScore) * 100U * (uint)ComboMeter.Combo;
 
 				MatchedSets.Add(new MatchedSet(matchBlocks, 1, this));
 				playMatchSound = true;

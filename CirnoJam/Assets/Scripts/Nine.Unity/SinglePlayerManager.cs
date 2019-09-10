@@ -14,11 +14,12 @@ public class SinglePlayerManager : MonoBehaviour
 	public Button MainMenuButton;
 	public Button QuitButton;
 	public RawImage GameoverBackground;
+	public RawImage PersonalBestBackground;
+	public Text PersonalBest;
+
 	private bool gameover = false;
 	private bool active = false;
-
 	private bool intense = false;
-    private bool isGameOver = false;
 	private uint lastScore = 0;
 
 
@@ -42,6 +43,26 @@ public class SinglePlayerManager : MonoBehaviour
 			ToggleButtons();
 			GameoverBackground.gameObject.SetActive(true);
 			gameover = true;
+			if(PlayerPrefs.HasKey("PersonalBest"))
+			{
+				if ((int)(ViewBoard.Score/100) > PlayerPrefs.GetInt("PersonalBest"))
+				{
+					PlayerPrefs.SetInt("PersonalBest", (int)(ViewBoard.Score / 100));
+					Mascot.SetSprite(Mascots.Cheer);
+					MusicManager.PlayTrack(MusicManager.Victory, MusicManager.PostGameLoop);
+
+				}
+				else
+				{
+					MusicManager.PlayTrack(MusicManager.Loss, MusicManager.PostGameLoop);
+				}
+			}
+			else
+			{
+				PlayerPrefs.SetInt("PersonalBest", (int)(ViewBoard.Score / 100));
+				MusicManager.PlayTrack(MusicManager.Victory, MusicManager.PostGameLoop);
+			}
+			PersonalBest.text = ("Personal Best: " + (uint)PlayerPrefs.GetInt("PersonalBest") * 100);
 		}
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
@@ -66,12 +87,7 @@ public class SinglePlayerManager : MonoBehaviour
 			Mascot.TransitionSprites(Mascots.Determined, 2, Mascots.Normal);
 			intense = false;
 		}
-		if (ViewBoard.IsGameOver && !isGameOver)
-		{
-
-			MusicManager.PlayTrack(MusicManager.Loss, MusicManager.PostGameLoop);
-			isGameOver = true;
-		}
+		
 	}
 	public void ToggleButtons()
 	{
@@ -79,6 +95,7 @@ public class SinglePlayerManager : MonoBehaviour
 		RestartButton.gameObject.SetActive(active);
 		MainMenuButton.gameObject.SetActive(active);
 		QuitButton.gameObject.SetActive(active);
-
+		PersonalBest.gameObject.SetActive(active);
+		PersonalBestBackground.gameObject.SetActive(active);
 	}
 }
