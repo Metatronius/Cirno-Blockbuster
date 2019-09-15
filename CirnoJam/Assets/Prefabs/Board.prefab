@@ -97,7 +97,7 @@ MonoBehaviour:
   IsPaused: 0
   ViewBlockFactory: {fileID: 7714072587359233663, guid: 572eaad945b577949a302e02419d7daa,
     type: 3}
-  ScrollSpeed: 0.2
+  ScrollSpeed: 0.11111111
   Cursor: {fileID: 141477964020403849, guid: 58f94432d1449c34e9ec02b03e30b07b, type: 3}
   SoundPlayer: {fileID: -4597005968553616822, guid: 2d75bb6dd72ad654ca9a5ebd065d8053,
     type: 3}

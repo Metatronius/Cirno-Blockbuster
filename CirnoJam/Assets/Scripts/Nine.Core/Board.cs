@@ -341,7 +341,7 @@ namespace Nine.Core
 				linear = true;
 				return;
 			}
-			ScrollSpeed = 2/5f;
+			ScrollSpeed = 1/9f;
 
 			if (BlocksCleared > 10)
 			{
